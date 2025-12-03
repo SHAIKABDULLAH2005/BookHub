@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import API from '../api';
 import BookCard from '../components/BookCard';
+
 
 export default function Home() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
+
+const navigate = useNavigate();
+
+useEffect(() => {
+  const user = localStorage.getItem("user");
+  if (!user) {
+    navigate("/login");
+  }
+}, []);
 
   const fetchBooks = async () => {
     try {

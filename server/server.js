@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const booksRoutes = require('./routes/books');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.get('/', (req, res) => res.send('BookHub API is running'));
 
 // API routes
 app.use('/api/books', booksRoutes);
+app.use("/api/users", userRoutes);
 
 // 404
 app.use((req, res) => res.status(404).json({ error: 'Not found' }));
