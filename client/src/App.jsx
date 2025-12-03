@@ -1,38 +1,23 @@
-// client/src/App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Navbar from './components/Navbar';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
-import BookList from './pages/BookList';
-import AddBook from './pages/AddBook';
-import EditBook from './pages/EditBook';
+import { Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
+import BookForm from './pages/BookForm';
 import BookDetails from './pages/BookDetails';
-import PrivateRoute from './components/PrivateRoute';
-import './styles/Auth.css';
+import Header from './components/Header';
+
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <div className="container">
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            
-            <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-            <Route path="/books" element={<PrivateRoute><BookList /></PrivateRoute>} />
-            <Route path="/books/add" element={<PrivateRoute><AddBook /></PrivateRoute>} />
-            <Route path="/books/edit/:id" element={<PrivateRoute><EditBook /></PrivateRoute>} />
-            <Route path="/books/:id" element={<PrivateRoute><BookDetails /></PrivateRoute>} />
-          </Routes>
-        </div>
-        <ToastContainer />
-      </div>
-    </Router>
+    <div>
+      <Header />
+      <main className="container">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/books/new" element={<BookForm />} />
+          <Route path="/books/edit/:id" element={<BookForm editMode />} />
+          <Route path="/books/:id" element={<BookDetails />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 
