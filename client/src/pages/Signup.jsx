@@ -14,7 +14,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:5000/api/users/signup", {
+      await axios.post("https://bookhub-h17h.onrender.com/api/users/signup", {
         name,
         email,
         password,
