@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'https://bookhub-h17h.onrender.com/api'
+  baseURL: import.meta.env.VITE_API_URL || 'https://bookhub-m62q.onrender.com//api'
 });
 
 export default API;
