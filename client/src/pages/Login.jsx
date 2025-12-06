@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import "../styles/auth.css";
+import { useNavigate,  Link} from "react-router-dom";
+import axios from "axios";
+
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -8,23 +9,22 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    // simple check (optional)
-    if (email === "" || password === "") {
-      alert("Please enter email and password");
-      return;
-    }
+  try {
+    const res = await axios.post(
+      "https://bookhub-m62q.onrender.com/api/users/login",
+      { email, password }
+    );
 
-    // save user to local storage
-    localStorage.setItem("user", email);
-
-    alert("Login successful ✅");
-
-    // go to home page
+    localStorage.setItem("user", JSON.stringify(res.data));
     navigate("/");
-  };
+  } catch (error) {
+    alert(error.response?.data?.message || "Login failed");
+  }
+};
+
 
   return (
     <div className="auth-container">

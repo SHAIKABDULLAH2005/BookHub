@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import "../styles/auth.css";
 
 const Signup = () => {
-  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -14,18 +14,29 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      await axios.post("https://bookhub-m62q.onrender.com/api/users/signup", {
-        name,
-        email,
-        password,
-      });
+ await axios.post(
+  "https://bookhub-m62q.onrender.com/api/users/signup",
+  {
+    username:
+    username,
+    email,
+    password,
+  },
+  {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  }
+);
+  alert("Signup Successful ✅");
+  navigate("/login");
+ } catch (error) {
+  console.log("FULL ERROR:", error);
+  console.log("RESPONSE:", error.response?.data);
+  alert(JSON.stringify(error.response?.data));
+}
 
-      alert("Signup Successful ✅");
-      navigate("/login");
-    } catch (error) {
-      alert("User already exists ❌");
-    }
-  };
+  }
 
   return (
     <div className="auth-container">
@@ -35,8 +46,8 @@ const Signup = () => {
         <input
           type="text"
           placeholder="Enter Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           required
         />
 

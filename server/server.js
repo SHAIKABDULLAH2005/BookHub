@@ -12,7 +12,9 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/bookhub';
 
 connectDB(MONGO_URI);
 
-app.use(cors());
+app.use(cors({
+  origin:"https://bookhub-shaikabdullah.netlify.app/"
+}));
 app.use(express.json());
 
 // Simple root
